@@ -1,0 +1,26 @@
+<div class="border shadow p-5 bg-body rounded-3" style="width: 600px">
+    <h4 class="text-center">Cadastro</h4>
+    <p>Crie sua conta, caso não tenha uma:</p>
+
+    <form action="/login/register" method="POST">
+        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+        <div class="mb-3">
+            <label class="form-label">E-mail</label>
+            <input type="email" class="form-control" name="registerEmail" />
+            <div class="form-text">Digite seu e-mail</div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input
+                type="password"
+                class="form-control"
+                name="registerPassword"
+            />
+            <div class="form-text">Digite sua senha</div>
+        </div>
+        <button type="submit" class="btn btn-primary rounded-5 w-25">
+            Registrar
+        </button>
+    </form>
+</div>

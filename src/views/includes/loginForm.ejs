@@ -1,0 +1,21 @@
+<div class="border shadow p-5 bg-body rounded-3" style="width: 600px">
+    <h4 class="text-center">Login</h4>
+    <p>Faça Login para acessar o sistema:</p>
+
+    <form action="/login/login">
+        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+        <div class="mb-3">
+            <label class="form-label"> Email address </label>
+            <input type="email" class="form-control" name="loginEmail" />
+            <div class="form-text">Digite seu e-mail</div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"> Password </label>
+            <input type="password" class="form-control" name="loginPassword" />
+            <div class="form-text">Digite sua senha</div>
+            
+        </div>
+        <button type="submit" class="btn btn-primary rounded-5 w-25">Entrar</button>
+    </form>
+</div>
