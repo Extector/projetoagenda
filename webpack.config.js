@@ -1,7 +1,6 @@
 //Todo arquivo JS no Node é um módulo
 
 const path = require("path"); // Node usa CommonJS --> Padrão do Node
-const stylelint = require("stylelint-webpack-plugin");
 
 module.exports = {
     mode: "development",

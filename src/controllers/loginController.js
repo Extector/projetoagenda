@@ -22,29 +22,23 @@ exports.register = async (req, res) => {
             return res.redirect("/login");
         });
     } catch (e) {
+        console.log (e);
         res.render("404");
-        throw new Error("Erro!");
     }
 };
 
 exports.login = async (req, res) => {
     try {
         const login = new Login(req.body);
+        console.log(login);
         await login.login();
 
         if (login.errors.length > 0) {
             req.flash("errors", login.errors);
-            req.session.save(() => {
-                return res.redirect("/login");
+            req.session.save(function () {
+                return res.redirect("back");
             });
             return;
-        }
-
-        if (!login.user) {
-            req.flash("errors", login.errors);
-            req.session.save(() => {
-                return res.redirect("/login");
-            });
         }
 
         req.flash("success", "Você entrou no sistema");
@@ -53,6 +47,6 @@ exports.login = async (req, res) => {
             return res.redirect("/");
         });
     } catch (e) {
-        return res.render("404");
+        res.render("404");
     }
 };

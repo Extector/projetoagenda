@@ -16,23 +16,29 @@ class Login {
         this.user = null;
     }
 
-    async login () {
+    async login() {
+        console.log('Entrou no método de login')
         this.validation();
-        if(this.errors.length > 0) return;
+        if (this.errors.length > 0) return;
 
-        this.user = await LoginModel.findOne({email: this.body.email});
+        console.log('Não houve erro na validação');
 
-        if(!this.user){
-            this.errors.push('Usuário já existe!');
+        this.user = await LoginModel.findOne({ email: this.body.email });
+
+        if (!this.user) {
+            this.errors.push("Erro! Tente novamente");
             return;
         }
 
-        if(!bcryptjs.compareSync(this.body.password, this.user.password)){
-            this.errors.push('E-mail/Senha inválidos, tente novamente');
-        }  
+        console.log('Não houve erro de usuário');
 
+        if (!(bcryptjs.compareSync(this.body.password, this.user.password))){
+            this.errors.push('Senha inválida');
+            return;
+        }
+
+        console.log('Passou por tudo!');
     }
-
 
     async register() {
         this.validation();
@@ -49,9 +55,8 @@ class Login {
     }
 
     async userExists() {
-        this.user = await LoginModel.findOne({email: this.body.email});
-        if(this.user) this.errors.push('Usuário já existe');
-        
+        this.user = await LoginModel.findOne({ email: this.body.email });
+        if (this.user) this.errors.push("Usuário já existe");
     }
 
     validation() {

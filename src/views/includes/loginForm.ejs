@@ -2,7 +2,7 @@
     <h4 class="text-center">Login</h4>
     <p>Faça Login para acessar o sistema:</p>
 
-    <form action="/login/login">
+    <form action="/login/login" method="POST">
         <input type="hidden" name="_csrf" value=<%= csrfToken %>>
         <div class="mb-3">
             <label class="form-label"> Email address </label>
