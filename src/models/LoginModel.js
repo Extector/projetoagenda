@@ -17,11 +17,8 @@ class Login {
     }
 
     async login() {
-        console.log('Entrou no método de login')
         this.validation();
         if (this.errors.length > 0) return;
-
-        console.log('Não houve erro na validação');
 
         this.user = await LoginModel.findOne({ email: this.body.email });
 
@@ -30,14 +27,10 @@ class Login {
             return;
         }
 
-        console.log('Não houve erro de usuário');
-
         if (!(bcryptjs.compareSync(this.body.password, this.user.password))){
             this.errors.push('Senha inválida');
             return;
         }
-
-        console.log('Passou por tudo!');
     }
 
     async register() {
@@ -76,8 +69,8 @@ class Login {
             if (typeof this.body[key] !== "string") this.body[key] = "";
 
         this.body = {
-            email: this.body.registerEmail,
-            password: this.body.registerPassword,
+            email: this.body.email,
+            password: this.body.password,
         };
     }
 }
