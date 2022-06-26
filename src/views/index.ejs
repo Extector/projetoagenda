@@ -10,13 +10,52 @@
             <%- include('includes/messages')%>
 
             <div class="responsive-table">
+                
                 <table class="table my-3">
-                    <tr class="my-2">
-                        <td>Nome</td>
-                        <td>Sobrenome</td>
-                        <td>Número</td>
-                        <td>E-mail</td>
+                    <nav class="navbar d-flex flex-row align-items-center justify-content-between">
+
+                        <div class="d-flex gap-3">
+                            <input class="form-control" style="width: 20rem; height: 2.5rem;" type="search" placeholder="Pesquisar por nome" aria-label="Search " />
+                            <button class="btn btn-primary">Pesquisar</button>
+                        </div>
+
+                        <% if(user) { %>
+                            <button type="button" class="btn btn-light" style="height: 2.5rem;">
+                                <a 
+                                    class="text-decoration-none"
+                                    href="/contact">Criar Contato</a>
+                            </button>
+                        <% } %>
+                    </nav>
+                    
+                    <tr class="my-2"></tr>
+                    <% contacts.forEach (contact => { %>
+                    
+                        <td><%= contact.name %></td>
+                        <td><%= contact.lastName %></td>
+                        <td><%= contact.number %></td>
+                        <td><%= contact.email %></td>
+
+                        <% if(user) { %>
+                            <td>
+                                <a
+                                    class="text-warning"
+                                    href="/contact/<%= contact._id %>"
+                                >
+                                    Editar
+                                </a>
+                            </td>
+                            <td>
+                                <a
+                                    class="text-danger"
+                                    href="/contact/delete/<%= contact._id %>"
+                                >
+                                    Excluir
+                                </a>
+                            </td>
+                        <% } %>
                     </tr>
+                    <% }) %>
                 </table>
             </div>
         </div>

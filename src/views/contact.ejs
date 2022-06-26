@@ -5,7 +5,11 @@
         <div class="col-lg-2"></div>
         <div class="col-lg-8 my-3">
             <h1 class="text-center">Contato</h1>
-            <p class="text-center lead ">Crie um contato logo abaixo</p>
+            <% if (!contact._id) { %>
+                <p class="text-center lead ">Crie um contato logo abaixo</p>
+            <% } else { %>
+                <p class="text-center lead ">Altere seu contato logo abaixo</p>
+            <% } %>
 
             <%- include('includes/messages')%>
 

@@ -2,7 +2,6 @@ const { async } = require("regenerator-runtime");
 const Login = require("../models/LoginModel");
 
 exports.index = (req, res) => {
-    if (req.session.user) return res.redirect("/");
     return res.render("login");
 };
 
@@ -13,16 +12,12 @@ exports.register = async (req, res) => {
 
         if (login.errors.length > 0) {
             req.flash("errors", login.errors);
-            req.session.save(function () {
-                return res.redirect("/login");
-            });
+            req.session.save(() => res.redirect("/login"));
             return;
         }
 
         req.flash("success", "Seu usuário foi criado com sucesso");
-        req.session.save(() => {
-            return res.redirect("/login");
-        });
+        req.session.save(() => res.redirect("/login"));
     } catch (e) {
         console.log(e);
         res.render("404");
@@ -36,19 +31,18 @@ exports.login = async (req, res) => {
 
         if (login.errors.length > 0) {
             req.flash("errors", login.errors);
-            req.session.save(function () {
-                res.redirect("/login");
-            });
+            req.session.save(() => res.redirect("/login"));
             return;
         }
 
         req.flash("success", "Você entrou no sistema");
         req.session.user = login.user;
-        req.session.save(() => {
-            return res.redirect("/login");
-        });
+
+        console.log(req.session.user);
+        req.session.save(() => res.redirect("/"));
     } catch (e) {
-        res.render("404");
+        console.log(e);
+        res.send("404");
     }
 };
 

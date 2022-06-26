@@ -1,32 +1,71 @@
 <div class="border shadow p-5 bg-body rounded-3" style="width: 900px">
-    <h4 class="text-center">Registre seu contato</h4>
-
-    <form action="/contact/register" method="POST" class="d-flex justify-content-between flex-column align-center">
-        <input type="hidden" name="_csrf" value=<%= csrfToken %>>
+    
+    <% if (!contact._id) { %>
+        <h4 class="text-center"> Registre seu contato </h4>
+        <form
+        action="/contact/register"
+        method="POST"
+        class="d-flex justify-content-between flex-column align-center"
+    >
+    <% } else {%>
+        <h4 class="text-center"> Altere seu contato </h4>
+        <form
+        action="/contact/edit/<%= contact._id %>"
+        method="POST"
+        class="d-flex justify-content-between flex-column align-center"
+        >
+    <% } %>
+    
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <div class="mb-3">
             <label class="form-label"> Nome </label>
-            <input type="text" class="form-control" name="contactName" />
+            <input
+                value="<%= contact.name %>"
+                type="text"
+                class="form-control"
+                name="contactName"
+            />
             <div class="form-text">Digite o nome do contato</div>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Sobrenome </label>
-            <input type="text" class="form-control" name="contactLastName" />
+            <input
+                value="<%= contact.lastName %>"
+                type="text"
+                class="form-control"
+                name="contactLastName"
+            />
             <div class="form-text">Digite o sobrenome do contato</div>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> Telefone </label>
-            <input type="tel" class="form-control" name="contactTel" />
+            <input
+                value="<%= contact.number %>"
+                type="tel"
+                class="form-control"
+                name="contactTel"
+            />
             <div class="form-text">Digite o telefone de contato</div>
         </div>
 
         <div class="mb-3">
             <label class="form-label"> E-Mail </label>
-            <input type="email" class="form-control" name="contactEmail" />
+            <input
+                value="<%= contact.email %>"
+                type="email"
+                class="form-control"
+                name="contactEmail"
+            />
             <div class="form-text">Digite o e-mail de contato</div>
         </div>
 
-        <button type="submit" class="btn btn-primary rounded-5 w-25 align-self-center">Entrar</button>
+        <button
+            type="submit"
+            class="btn btn-primary rounded-5 w-25 align-self-center"
+        >
+            Enviar
+        </button>
     </form>
 </div>

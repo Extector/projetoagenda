@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { async } = require("regenerator-runtime");
 const validator = require("validator");
 
 const ContactSchema = new mongoose.Schema({
@@ -18,6 +19,34 @@ class Contact {
         this.contact = null;
     }
 
+    static searchContacts = async () => {
+        const contacts = await ContactModel.find()
+            .sort({ createdAt: -1 });
+        return contacts;
+    }
+
+    static searchById = async (id) => {
+        if (typeof id !== "string") return;
+        const contact = await ContactModel.findById(id);
+        return contact;
+    };
+
+    static async delete(id) {
+        if(typeof id !== "string") return;
+        const contact = ContactModel.findByIdAndDelete(id);
+        if(!contact) return;
+        return contact;
+    }
+
+    async edit(id) {
+        if (typeof id !== "string") return;
+        this.validation();
+        if (this.errors > 0) return;
+        this.contact = await ContactModel.findByIdAndUpdate(id, this.body, {
+            new: true,
+        });
+    }
+
     async register() {
         this.validation();
 
@@ -27,17 +56,18 @@ class Contact {
 
     validation() {
         this.cleanUp();
-        if (this.body.email && !validator.isEmail(this.body.email)) 
+        if (this.body.email && !validator.isEmail(this.body.email))
             this.errors.push("E-mail inválido");
 
         if (this.body.number && this.body.number.length < 5)
             this.errors.push("Número inválido");
 
-        if (!this.body.name) 
-            this.errors.push("Nome de contato obrigatório!");
+        if (!this.body.name) this.errors.push("Nome de contato obrigatório!");
 
         if (!this.body.email && !this.body.number)
-            this.errors.push("É necessário pelo menos uma informação de contato");
+            this.errors.push(
+                "É necessário pelo menos uma informação de contato"
+            );
     }
 
     cleanUp() {
