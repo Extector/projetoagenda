@@ -15,7 +15,7 @@
                     <nav class="navbar d-flex flex-row align-items-center justify-content-between">
 
                         <div class="d-flex gap-3">
-                            <input class="form-control" style="width: 20rem; height: 2.5rem;" type="search" placeholder="Pesquisar por nome" aria-label="Search " />
+                            <input class="form-control" style="width: 20rem; height: 2.5rem;" type="search" name="search" placeholder="Pesquisar por nome" aria-label="Search " />
                             <button class="btn btn-primary">Pesquisar</button>
                         </div>
 
@@ -39,7 +39,7 @@
                         <% if(user) { %>
                             <td>
                                 <a
-                                    class="text-warning"
+                                    class="text-decoration-none"
                                     href="/contact/<%= contact._id %>"
                                 >
                                     Editar
@@ -47,7 +47,7 @@
                             </td>
                             <td>
                                 <a
-                                    class="text-danger"
+                                    class="text-danger text-decoration-none"
                                     href="/contact/delete/<%= contact._id %>"
                                 >
                                     Excluir

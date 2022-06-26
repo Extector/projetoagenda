@@ -8,6 +8,7 @@ const ContactSchema = new mongoose.Schema({
     number: { type: String, required: false },
     email: { type: String, required: false },
     createdAt: { type: Date, default: Date.now },
+    createdBy: { type: mongoose.Types.ObjectId, required: true},
 });
 
 const ContactModel = mongoose.model("contacts", ContactSchema);
