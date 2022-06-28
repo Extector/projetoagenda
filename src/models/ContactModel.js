@@ -8,7 +8,6 @@ const ContactSchema = new mongoose.Schema({
     number: { type: String, required: false },
     email: { type: String, required: false },
     createdAt: { type: Date, default: Date.now },
-    createdBy: { type: mongoose.Types.ObjectId, required: true},
 });
 
 const ContactModel = mongoose.model("contacts", ContactSchema);
@@ -21,10 +20,9 @@ class Contact {
     }
 
     static searchContacts = async () => {
-        const contacts = await ContactModel.find()
-            .sort({ createdAt: -1 });
+        const contacts = await ContactModel.find().sort({ createdAt: -1 });
         return contacts;
-    }
+    };
 
     static searchById = async (id) => {
         if (typeof id !== "string") return;
@@ -33,9 +31,9 @@ class Contact {
     };
 
     static async delete(id) {
-        if(typeof id !== "string") return;
+        if (typeof id !== "string") return;
         const contact = ContactModel.findByIdAndDelete(id);
-        if(!contact) return;
+        if (!contact) return;
         return contact;
     }
 
