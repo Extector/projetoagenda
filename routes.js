@@ -3,7 +3,7 @@ const route = express.Router();
 const homeController = require("./src/controllers/homeController");
 const loginController = require("./src/controllers/loginController");
 const contactController = require("./src/controllers/contactController");
-const { isLogged } = require("./src/middlewares/middleware")
+const { isLogged } = require("./src/middlewares/middleware");
 
 //homeController
 route.get("/", homeController.index);

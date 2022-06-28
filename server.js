@@ -24,12 +24,6 @@ const {
     csrfMiddleware,
 } = require("./src/middlewares/middleware");
 
-//CRUD -> Create, Read, Update, Delete
-//        POST    GET   PUT     DELETE
-
-// : -> Parâmetro de URL
-// ? -> Define se é opcional ou não
-
 app.use(helmet());
 
 app.use(express.urlencoded({ extended: true }));
@@ -42,7 +36,7 @@ const sessionOptions = session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24,
         httpOnly: true,
     },
 });
@@ -61,8 +55,5 @@ app.use(csrfMiddleware);
 app.use(routes);
 
 app.on("pronto", () => {
-    app.listen(process.env.PORT || 3000, () => {
-        console.log("Acessar http://localhost:3000");
-        console.log("Servidor executando na porta 3000");
-    });
+    app.listen(process.env.PORT || 3000, () => {});
 });
