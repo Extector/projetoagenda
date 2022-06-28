@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js --ignore public --ignore frontend",
-    "dev": "webpack -w"
+    "start": "node server.js --ignore public --ignore frontend",
+    "dev": "webpack -w",
+    "development": "nodemon server.js --ignore public --ignore frontend"
   },
   "keywords": [],
   "author": "",
